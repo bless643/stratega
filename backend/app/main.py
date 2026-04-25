@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
-from app.config import OUTPUTS_DIR, get_allowed_origins
+from app.config import OUTPUTS_DIR, get_allowed_origin_regex, get_allowed_origins
 from app.generator import generate_content_calendar
 from app.schemas import GenerateCalendarRequest
 
@@ -14,6 +14,7 @@ app = FastAPI(title="Stratega AI API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_allowed_origins(),
+    allow_origin_regex=get_allowed_origin_regex(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
